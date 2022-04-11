@@ -13,7 +13,8 @@ class filname_ret:
     def __init__(self, rootpath='', file_types=()):
         self.rootpath = rootpath
         self.file_types = file_types
-        self.fname = []
+        self.fileDirectory = []
+        self.files = []
         try:
             if os.path.exists(self.rootpath) == True :
                 print ('root directory is: ',self.rootpath)
@@ -24,10 +25,13 @@ class filname_ret:
                 # 
                 for root,d_names,f_names in os.walk(self.rootpath):
                     for f in f_names:
-                        if os.path.splitext(f)[1].lower().endswith(self.file_types) :
-                            self.fname.append(os.path.join(self.rootpath, f))
+                        # if os.path.split(f)[1].lower().endswith(self.file_types) :
+                        if f.lower().endswith(self.file_types) :
+                            # print (f)
+                            self.fileDirectory.append(os.path.join(root, f))
+                            self.files.append(f)
                 
-                # return self.fname
+                # return self.fileDirectory
             else:
                 print ("Path or Files doesn't exist")
         except OSError as error:
@@ -42,14 +46,17 @@ class filname_ret:
     following function return the list in a list view
 
     """
-    def showFile( filname ):
+    def showList( filname ):
         print('Showing all the files below: \n')
         for item in filname:
             print(item,'\n')
+            # print(type(item))
 
     """
     constructor doesn't return any filetypethats why
     returns a list type variable 
     """
     def return_files_name ( self):
-        return self.fname
+        return self.files
+    def return_file_dir ( self):
+        return self.fileDirectory
