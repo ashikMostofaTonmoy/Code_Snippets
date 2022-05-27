@@ -49,7 +49,7 @@ class filname_ret:
     def showList( filname ):
         print('Showing all the files below: \n')
         for item in filname:
-            print(item,'\n')
+            print(item)
             # print(type(item))
 
     """
