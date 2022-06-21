@@ -6,3 +6,7 @@
 - python -m ipykernel install --user
 - python -m ipykernel install --user --name=venv
 - jupyter kernelspec list
+
+# for conda env
+
+- conda install -n paddle_env ipykernel --update-deps --force-reinstall
