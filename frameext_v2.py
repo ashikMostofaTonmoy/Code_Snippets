@@ -3,18 +3,18 @@ import os
 
 # Create a VideoCapture object and read from input file
 # If the input is the camera, pass 0 instead of the video file name
-path = 'inputData/'
+path = 'Data/'
 
-name= '1'
+name = 'Kentucky Derby 2022 (FULL RACE) - NBC Sportsasjdfhasdjh'
 
-outPath= 'results/'+name
+outPath = 'Data/results/'+name
 cap = cv2.VideoCapture(path+name+'.mp4')
 nOfVidioFrame = float(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-nOfDesiredFrame = 70
-print(nOfVidioFrame)
-n_of_frame_interval = int(nOfVidioFrame/ nOfDesiredFrame)
-print (n_of_frame_interval)
-
+# nOfDesiredFrame = 3000
+# print(f"nOfVidioFrame: {nOfVidioFrame}")
+# n_of_frame_interval = int(nOfVidioFrame / nOfDesiredFrame)
+n_of_frame_interval = 5
+print(f"n_of_frame_interval: {n_of_frame_interval}")
 
 
 try:
@@ -39,10 +39,14 @@ while cap.isOpened():
         count += 1
 
         if count == n_of_frame_interval:
-            frame2 = cv2.resize(frame, dsize=(0, 0), fx= .5, fy= .5)
-            #cv2.imshow('Frame',frame2)
-            cv2.imwrite(outPath+"/"+"frame%d.jpg" % num, frame)
+            # frame2 = cv2.resize(frame, dsize=(0, 0), fx=.5, fy=.5)
+            # cv2.imshow('Frame',frame2)
+            zerofills = str(num).zfill(6)
+            name = f"{outPath}/frame_{zerofills}.jpg"
+            # cv2.imwrite(outPath+"/"+"frame_%d.jpg" % num, frame)
+            cv2.imwrite(name, frame)
             count = count + 1
+            print(f"processing frame no: {zerofills}")
             num += 1
             count = 0
 
